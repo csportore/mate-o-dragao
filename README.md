@@ -1,0 +1,1 @@
+Este jogo foi desenvolvido para poder ensinar Programação Orientada a Objetos em C#
