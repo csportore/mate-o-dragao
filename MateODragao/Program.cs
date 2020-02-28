@@ -184,13 +184,15 @@ namespace MateODragao {
 
         private static Guerreiro CriarGuerreiro () {
 
-            System.Console.WriteLine ("Deseja começar com um personagem pronto? Responda com S ou N.");
-            string respostaUsuario = Console.ReadLine ();
+            
 
             Guerreiro guerreiro = null;
 
             bool terminouDeMontar = false;
             do {
+                System.Console.WriteLine ("Deseja começar com um personagem pronto? Responda com S ou N.");
+                string respostaUsuario = Console.ReadLine ();
+                
                 switch (respostaUsuario.ToUpper ()) {
                     case "S":
                         guerreiro = new Guerreiro ("Asdrúbal", "Mequetreff", "Pentescopéia", DateTime.Parse ("01/01/1450"), "Espada", "Armadura de ferro", 2, 1, 1, 1, 2);
@@ -234,30 +236,34 @@ namespace MateODragao {
 
                             for (int i = 0; i < listaNomesAtributos.Length; i++)
                             {
-                                System.Console.WriteLine ($"Digite a {listaNomesAtributos[i]} do personagem: ");
-                                int valor = int.Parse(Console.ReadLine ());
+                                if (pontosIniciais > 0)
+                                {
+                                    System.Console.WriteLine ($"Digite a {listaNomesAtributos[i]} do personagem: ");
+                                    int valor = int.Parse(Console.ReadLine ());
 
-                                /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
-                                if (listaValoresAtributos[i] >= 5)
-                                {
-                                    MostrarMensagem("Atributo já possui pelo menos 5 pontos. Passando para o próximo", TipoMensagemEnum.ALERTA);
-                                    continue;
-                                }
-                                
-                                 /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
-                                if (pontosIniciais >= valor && (valor + listaValoresAtributos[i]) <= 5)
-                                {
-                                    listaValoresAtributos[i] += valor;
-                                    pontosIniciais -= valor;
-                                    System.Console.WriteLine($"Sobraram {pontosIniciais} pontos");
-                                } else if (pontosIniciais <= 0) {
+                                    /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
+                                    if (listaValoresAtributos[i] >= 5)
+                                    {
+                                        MostrarMensagem("Atributo já possui pelo menos 5 pontos. Passando para o próximo", TipoMensagemEnum.ALERTA);
+                                        continue;
+                                    }
+                                    
+                                    /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
+                                    if (pontosIniciais >= valor && (valor + listaValoresAtributos[i]) <= 5)
+                                    {
+                                        listaValoresAtributos[i] += valor;
+                                        pontosIniciais -= valor;
+                                        System.Console.WriteLine($"Sobraram {pontosIniciais} pontos");
+                                    } 
+                                    else 
+                                    {
+                                        MostrarMensagem("Você não possui tantos pontos assim. Tente novamente.", TipoMensagemEnum.ALERTA);
+                                    }
+                                } else {
                                     MostrarMensagem("Pontos já distribuídos", TipoMensagemEnum.SUCESSO);
                                     break;
                                 }
-                                else 
-                                {
-                                    MostrarMensagem("Você não possui tantos pontos assim. Tente novamente.", TipoMensagemEnum.ALERTA);
-                                }
+                                
                             }
                             
                         }
