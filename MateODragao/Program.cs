@@ -11,15 +11,7 @@ namespace MateODragao {
 
             do {
                 /* INICIO - Menu Principal */
-                Console.Clear ();
-                System.Console.WriteLine ("===========================");
-                System.Console.WriteLine ("       Mate o Dragão!");
-                System.Console.WriteLine ("===========================");
-
-                System.Console.WriteLine (" 1 - Iniciar jogo");
-                System.Console.WriteLine (" 0 - Sair do jogo");
-                System.Console.Write (" Digite o código da opção:");
-                string opcaoJogador = Console.ReadLine ();
+                string opcaoJogador = MontarMenuPrincipal();
 
                 /* FIM - Menu Principal */
                 switch (opcaoJogador) {
@@ -283,6 +275,21 @@ namespace MateODragao {
 
             return guerreiro;
 
+        }
+
+        private static string MontarMenuPrincipal()
+        {
+            Console.Clear ();
+            System.Console.WriteLine ("===========================");
+            System.Console.WriteLine ("       Mate o Dragão!");
+            System.Console.WriteLine ("===========================");
+
+            System.Console.WriteLine (" 1 - Iniciar jogo");
+            System.Console.WriteLine (" 0 - Sair do jogo");
+            System.Console.Write (" Digite o código da opção:");
+            string opcaoJogador = Console.ReadLine ();
+
+            return opcaoJogador;
         }
 
         public static Dragao CriarDragao () {
