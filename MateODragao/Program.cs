@@ -189,11 +189,13 @@ namespace MateODragao {
             Guerreiro guerreiro = null;
 
             bool terminouDeMontar = false;
-            do {
+            do 
+            {
                 System.Console.WriteLine ("Deseja começar com um personagem pronto? Responda com S ou N.");
                 string respostaUsuario = Console.ReadLine ();
-                
-                switch (respostaUsuario.ToUpper ()) {
+
+                switch (respostaUsuario.ToUpper ()) 
+                {
                     case "S":
                         guerreiro = new Guerreiro ("Asdrúbal", "Mequetreff", "Pentescopéia", DateTime.Parse ("01/01/1450"), "Espada", "Armadura de ferro", 2, 1, 1, 1, 2);
                         terminouDeMontar = true;
@@ -223,7 +225,8 @@ namespace MateODragao {
                         string[] listaNomesAtributos = {"Força", "Destreza", "Agilidade", "Inteligência", "Vigor"};
                         int[] listaValoresAtributos = {1, 1, 1, 1, 1};
 
-                        while (pontosIniciais != 0) {
+                        while (pontosIniciais != 0) 
+                        {
                             Console.Clear ();
                             System.Console.WriteLine ($"Você possui {pontosIniciais} pontos a serem distribuídos");
                             System.Console.WriteLine ("Seu status atual:");
