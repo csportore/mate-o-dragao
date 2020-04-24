@@ -27,8 +27,8 @@ namespace MateODragao {
                         /* INICIO - Criando os personagens (objetos) */
                         Guerreiro guerreiro = new Guerreiro ();
                         guerreiro.Nome = "Asdrúbal";
-                        guerreiro.Sobrenome = "Mequetreff";
-                        guerreiro.CidadeNatal = "Pentescopéia";
+                        guerreiro.Sobrenome = "Silvius";
+                        guerreiro.CidadeNatal = "Brasilidis";
                         guerreiro.DataDeNascimento = DateTime.Parse ("01/01/1450");
                         guerreiro.FerramentaAtaque = "Espada";
                         guerreiro.FerramentaProtecao = "Armadura de ferro";
