@@ -11,19 +11,18 @@ namespace MateODragao {
 
             do {
                 /* INICIO - Menu Principal */
-                string opcaoJogador = MontarMenuPrincipal();
+                // Temos que trocar para int aqui porque agora o código não é mais digitado pelo usuário, mas sim decidido
+                // por nós no método
+                int opcaoJogador = MontarMenuPrincipal ();
 
                 /* FIM - Menu Principal */
                 switch (opcaoJogador) {
-                    case "1":
+                    case 1:
                         Console.Clear ();
 
                         /* INICIO - Criando os personagens (objetos) */
-
                         Guerreiro guerreiro = CriarGuerreiro ();
-
                         Dragao dragao = CriarDragao ();
-
                         /* FIM - Criando os personagens (objetos) */
 
                         /* INICIO - Primeiro Diálogo */
@@ -167,37 +166,41 @@ namespace MateODragao {
                         /** FIM - Turnos Oficiais */
 
                         break;
-                    case "0":
+                    // Opção adicionada para deixar o menu gamer mais interessante
+                    case 2:
+                        System.Console.WriteLine("Esse joguinho vai ficar massa!");
+                        System.Console.WriteLine ();
+                        System.Console.WriteLine ("Aperte ENTER para voltar");
+                        Console.ReadLine ();
+                        break;
+                    case 3:
                         jogadorNaoDesistiu = false;
                         break;
                     default:
                         System.Console.WriteLine ("Comando desconhecido");
                         break;
-
                 }
-
             } while (jogadorNaoDesistiu);
-
             System.Console.WriteLine ("GAME OVER!");
-
         }
 
+        #region Criação de Personagens
+        /*
+        =========================================================
+                                PERSONAGENS
+        =========================================================
+        */
         private static Guerreiro CriarGuerreiro () {
-
-            
-
             Guerreiro guerreiro = null;
 
             bool terminouDeMontar = false;
-            do 
-            {
+            do {
                 System.Console.WriteLine ("Deseja começar com um personagem pronto? Responda com S ou N.");
                 string respostaUsuario = Console.ReadLine ();
 
-                switch (respostaUsuario.ToUpper ()) 
-                {
+                switch (respostaUsuario.ToUpper ()) {
                     case "S":
-                        guerreiro = new Guerreiro ("Asdrúbal", "Mequetreff", "Pentescopéia", DateTime.Parse ("01/01/1450"), "Espada", "Armadura de ferro", 2, 1, 1, 1, 2);
+                        guerreiro = new Guerreiro ("Asdrúbal", "Silvius", "Brasilidis", DateTime.Parse ("01/01/1450"), "Espada", "Armadura de ferro", 2, 1, 1, 1, 2);
                         terminouDeMontar = true;
                         break;
                     case "N":
@@ -207,6 +210,10 @@ namespace MateODragao {
 
                         System.Console.Write ("Digite o sobrenome do personagem: ");
                         string sobrenome = Console.ReadLine ();
+
+                        System.Console.Write ("Escolha o gênero do personagem: ");
+
+                        string genero = Console.ReadLine ();
 
                         System.Console.Write ("Digite a cidade natal do personagem: ");
                         string cidadeNatal = Console.ReadLine ();
@@ -222,56 +229,45 @@ namespace MateODragao {
 
                         int pontosIniciais = 7;
 
-                        string[] listaNomesAtributos = {"Força", "Destreza", "Agilidade", "Inteligência", "Vigor"};
-                        int[] listaValoresAtributos = {1, 1, 1, 1, 1};
+                        string[] listaNomesAtributos = { "Força", "Destreza", "Agilidade", "Inteligência", "Vigor" };
+                        int[] listaValoresAtributos = { 1, 1, 1, 1, 1 };
 
-                        while (pontosIniciais != 0) 
-                        {
+                        while (pontosIniciais != 0) {
                             Console.Clear ();
                             System.Console.WriteLine ($"Você possui {pontosIniciais} pontos a serem distribuídos");
                             System.Console.WriteLine ("Seu status atual:");
-                            for (int i = 0; i < listaNomesAtributos.Length; i++)
-                            {
+                            for (int i = 0; i < listaNomesAtributos.Length; i++) {
                                 System.Console.WriteLine ($"{listaNomesAtributos[i]}: {listaValoresAtributos[i]}");
                             }
-                            
-                            System.Console.WriteLine();
 
-                            for (int i = 0; i < listaNomesAtributos.Length; i++)
-                            {
-                                if (pontosIniciais > 0)
-                                {
+                            System.Console.WriteLine ();
+
+                            for (int i = 0; i < listaNomesAtributos.Length; i++) {
+                                if (pontosIniciais > 0) {
                                     System.Console.WriteLine ($"Digite a {listaNomesAtributos[i]} do personagem: ");
-                                    int valor = int.Parse(Console.ReadLine ());
+                                    int valor = int.Parse (Console.ReadLine ());
 
                                     /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
-                                    if (listaValoresAtributos[i] >= 5)
-                                    {
-                                        MostrarMensagem("Atributo já possui pelo menos 5 pontos. Passando para o próximo", TipoMensagemEnum.ALERTA);
+                                    if (listaValoresAtributos[i] >= 5) {
+                                        MostrarMensagem ("Atributo já possui pelo menos 5 pontos. Passando para o próximo", TipoMensagemEnum.ALERTA);
                                         continue;
                                     }
-                                    
+
                                     /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
-                                    if (pontosIniciais >= valor && (valor + listaValoresAtributos[i]) <= 5)
-                                    {
+                                    if (pontosIniciais >= valor && (valor + listaValoresAtributos[i]) <= 5) {
                                         listaValoresAtributos[i] += valor;
                                         pontosIniciais -= valor;
-                                        System.Console.WriteLine($"Sobraram {pontosIniciais} pontos");
-                                    } 
-                                    else 
-                                    {
-                                        MostrarMensagem("Você não possui tantos pontos assim. Tente novamente.", TipoMensagemEnum.ALERTA);
+                                        System.Console.WriteLine ($"Sobraram {pontosIniciais} pontos");
+                                    } else {
+                                        MostrarMensagem ("Você não possui tantos pontos assim. Tente novamente.", TipoMensagemEnum.ALERTA);
                                     }
                                 } else {
-                                    MostrarMensagem("Pontos já distribuídos", TipoMensagemEnum.SUCESSO);
+                                    MostrarMensagem ("Pontos já distribuídos", TipoMensagemEnum.SUCESSO);
                                     break;
                                 }
-                                
                             }
-                            
                         }
-
-                        guerreiro = new Guerreiro(nome, sobrenome,cidadeNatal,dataNascimento,ferramentaAtaque,ferramentaProtecao, listaValoresAtributos);
+                        guerreiro = new Guerreiro (nome, sobrenome, cidadeNatal, dataNascimento, ferramentaAtaque, ferramentaProtecao, listaValoresAtributos);
                         terminouDeMontar = true;
                         break;
                     default:
@@ -286,35 +282,86 @@ namespace MateODragao {
 
         }
 
-        private static string MontarMenuPrincipal()
-        {
-            Console.Clear ();
-            System.Console.WriteLine ("===========================");
-            System.Console.WriteLine ("       Mate o Dragão!");
-            System.Console.WriteLine ("===========================");
-
-            System.Console.WriteLine (" 1 - Iniciar jogo");
-            System.Console.WriteLine (" 0 - Sair do jogo");
-            System.Console.Write (" Digite o código da opção:");
-            string opcaoJogador = Console.ReadLine ();
-
-            return opcaoJogador;
-        }
-
+        /*
+            Abrindo a possibilidade de criar mais dragões!
+        */
         public static Dragao CriarDragao () {
             Dragao dragao = new Dragao ("Dragonildo", 5, 3, 2, 3, 5);
             return dragao;
         }
+        #endregion
+        #region Criação de Menus
+        /*
+        =========================================================
+                                MENUS
 
-        public static void CriarDialogo (string emissor, string frase) {
-            System.Console.WriteLine ($"{emissor.ToUpper()}: {frase}");
-        }
+        Caso tenhamos que alterar algum aspecto desses menus,
+        Esse tipo de abordagem nos pouparia trabalho extra e 
+        ainda manteria a consistência no visual deles
+        =========================================================
+        */
+        private static int MontarMenuPrincipal () {
+            /* MONTAGEM
 
-        public static void FinalizarDialogo () {
-            System.Console.WriteLine ();
-            System.Console.WriteLine ("Aperte ENTER para prosseguir");
-            Console.ReadLine ();
-            Console.Clear ();
+                Nesta fase o alinhamento será manual
+                Devemos deixar claro os seguintes aspectos dessa abordagem
+                Vantagem: é muito simples e funciona
+                Desvantagem: o texto pode transbordar
+            */
+            bool jogadorEscolheu = false;
+            int opcaoSelecionada = 1;
+
+            do {
+                Console.Clear ();
+
+                System.Console.WriteLine ("===========================");
+                System.Console.WriteLine ("       Mate o Dragão!");
+                System.Console.WriteLine ("===========================");
+
+                if (opcaoSelecionada == 1) {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    System.Console.WriteLine ("  Iniciar jogo  ");
+                    Console.ResetColor ();
+                } else {
+                    System.Console.WriteLine ("  Iniciar jogo  ");
+                }
+
+                if (opcaoSelecionada == 2) {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    System.Console.WriteLine ("  Sobre o jogo  ");
+                    Console.ResetColor ();
+                } else {
+                    System.Console.WriteLine ("  Sobre o jogo  ");
+                }
+
+                if (opcaoSelecionada == 3) {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    System.Console.WriteLine ("  Sair do jogo  ");
+                    Console.ResetColor ();
+                } else {
+                    System.Console.WriteLine ("  Sair do jogo  ");
+                }
+
+                var key = Console.ReadKey (true).Key;
+
+                // Exemplo de operador ternário
+                switch (key) {
+                    case ConsoleKey.UpArrow:
+                    // Exemplo de porque usar o decremento/incremento antes
+                    // Faça um teste com ele depois da variável também!
+                        opcaoSelecionada = opcaoSelecionada == 1 ? opcaoSelecionada = 1 : --opcaoSelecionada;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        opcaoSelecionada = opcaoSelecionada == 3 ? opcaoSelecionada = 3 : ++opcaoSelecionada;
+                        break;
+                    case ConsoleKey.Enter:
+                        jogadorEscolheu = true;
+                        break;
+                }
+
+            } while (!jogadorEscolheu);
+
+            return opcaoSelecionada;
         }
 
         public static void GerarMenuTurnos (string quemEstaAgindo) {
@@ -327,6 +374,29 @@ namespace MateODragao {
         public static void MostrarHP (int guerreiroHP, int dragaoHP) {
             System.Console.WriteLine ($"HP Dragão: {dragaoHP}");
             System.Console.WriteLine ($"HP Jogador: {guerreiroHP}");
+        }
+
+        #endregion
+        #region Criação de Diálogos
+        /*
+        =========================================================
+                                DIÁLOGOS
+
+        Caso tenhamos que alterar algum aspecto desses diálogos,
+        Esse tipo de abordagem nos pouparia trabalho extra e 
+        ainda manteria a consistência no visual deles
+        =========================================================
+        */
+
+        public static void CriarDialogo (string emissor, string frase) {
+            System.Console.WriteLine ($"{emissor.ToUpper()}: {frase}");
+        }
+
+        public static void FinalizarDialogo () {
+            System.Console.WriteLine ();
+            System.Console.WriteLine ("Aperte ENTER para prosseguir");
+            Console.ReadLine ();
+            Console.Clear ();
         }
 
         public static void MostrarMensagem (string mensagem, TipoMensagemEnum tipoMensagem) {
@@ -356,4 +426,5 @@ namespace MateODragao {
         }
 
     }
+    #endregion
 }
