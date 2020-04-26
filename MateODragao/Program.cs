@@ -37,9 +37,9 @@ namespace MateODragao {
                         /* FIM - Primeiro Diálogo */
 
                         /* INICIO - Segundo Diálogo */
-                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Eu sou {guerreiro.Nome}! Da casa {guerreiro.Sobrenome}, ó criatura morfética!");
-                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Vim de {guerreiro.CidadeNatal} para derrotar-te e mostrar meu valor!");
-                        System.Console.WriteLine ($"{dragao.Nome.ToUpper()}: QUEM? DE ONDE? Bom, que seja...fritar-te-ei e devorar-te-ei, primata insolente!");
+                        CriarDialogo (guerreiro.Nome, $"Eu sou {guerreiro.Nome}! Da casa {guerreiro.Sobrenome}, ó criatura morfética!");
+                        CriarDialogo (guerreiro.Nome, $"Vim de {guerreiro.CidadeNatal} para derrotar-te e mostrar meu valor!");
+                        CriarDialogo (dragao.Nome, $"QUEM? DE ONDE? Bom, que seja...fritar-te-ei e devorar-te-ei, primata insolente!");
 
                         FinalizarDialogo ();
                         /* FIM - Segundo Diálogo */
@@ -67,18 +67,18 @@ namespace MateODragao {
                                     int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                                     if (guerreiroDestrezaTotal > dragaoDestrezaTotal) {
-                                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO! BIRLLLL!");
+                                        CriarDialogo (guerreiro.Nome, $"Toma essa lagarto MALDJEETO! BIRLLLL!");
                                         dragao.Vida -= poderAtaqueGuerreiro + 5;
                                         System.Console.WriteLine ($"HP Dragão: {dragao.Vida}");
                                         System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
                                     } else {
-                                        System.Console.WriteLine ($"{dragao.Nome.ToUpper()}: Errrrrou, humanóide tosco!");
+                                        CriarDialogo (dragao.Nome.ToUpper(), $"Errrrrou, humanóide tosco!");
                                         System.Console.WriteLine ($"HP Dragão: {dragao.Vida}");
                                         System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
                                     }
                                     break;
                                 case "2":
-                                    System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Simbora fii! FLW VLW!");
+                                    CriarDialogo (guerreiro.Nome, $"Simbora fii! FLW VLW!");
                                     jogadorNaoCorreu = false;
                                     break;
                             }
@@ -100,12 +100,12 @@ namespace MateODragao {
                             int dragaoDestrezaTotal = guerreiro.Destreza + numeroAleatorioDragao;
 
                             if (guerreiroDestrezaTotal < dragaoDestrezaTotal) {
-                                System.Console.WriteLine ($"{dragao.Nome.ToUpper()}: HA! Estúpido ser!");
+                                CriarDialogo (dragao.Nome, $"HA! Estúpido ser!");
                                 guerreiro.Vida -= dragao.Forca;
                                 MostrarHP (guerreiro.Vida, dragao.Vida);
 
                             } else {
-                                System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Eita lasquera que essa passou perto!");
+                                CriarDialogo (guerreiro.Nome, $"Eita lasquera que essa passou perto!");
                                 MostrarHP (guerreiro.Vida, dragao.Vida);
                             }
 
@@ -138,15 +138,15 @@ namespace MateODragao {
                                     int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                                     if (guerreiroDestrezaTotal > dragaoDestrezaTotal) {
-                                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO!");
+                                        CriarDialogo (guerreiro.Nome, $"Toma essa lagarto MALDJEETO!");
                                         dragao.Vida -= poderAtaqueGuerreiro + 5;
 
                                     } else {
-                                        System.Console.WriteLine ($"{dragao.Nome.ToUpper()}: Errrrrou, humanóide tosssssco!");
+                                        CriarDialogo (dragao.Nome, $"Errrrrou, humanóide tosssssco!");
                                     }
                                     break;
                                 case "2":
-                                    System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Simbora fii! FLW VLW!");
+                                    CriarDialogo (guerreiro.Nome, $"Simbora fii! FLW VLW!");
                                     jogadorNaoCorreu = false;
                                     break;
                             }
@@ -424,7 +424,7 @@ namespace MateODragao {
             System.Console.WriteLine ("\nAperte ENTER para voltar ao menu principal");
             Console.ReadLine ();
         }
-
-    }
     #endregion
+    }
+    
 }
