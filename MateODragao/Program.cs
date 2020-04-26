@@ -278,6 +278,8 @@ namespace MateODragao {
                 }
             } while (!terminouDeMontar);
 
+            Console.Clear();
+            
             return guerreiro;
 
         }
